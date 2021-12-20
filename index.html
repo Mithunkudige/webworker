@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>web worker</title>
+</head>
+
+<body>
+
+    <button type="button" id="workbtn">Click</button>
+    <button type="button" id="random">Click</button>
+	
+	<div id="workbtndata"></div>
+	<div id="randmeno"></div>
+ 
+    <script>
+        document.querySelector('#workbtn').addEventListener('click', function() {
+			 
+				var myworker = new Worker('worker.js');
+				myworker.postMessage('do work');
+				myworker.onmessage = function(e) {
+					document.getElementById('workbtndata').innerHTML = e.data;
+				}
+			 
+			
+			/* var result = 0;
+			for(var i=0;i<=10000000000;i++) {
+				result += i;
+			}			
+			document.getElementById('workbtndata').innerHTML = result; */
+		});
+		
+		document.querySelector('#random').addEventListener('click', function() {
+			document.getElementById('randmeno').innerHTML = Math.random();
+		});
+    </script>
+
+</html>
